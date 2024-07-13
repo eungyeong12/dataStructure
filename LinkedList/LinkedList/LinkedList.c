@@ -87,3 +87,38 @@ int SLL_GetNodeCount(Node* Head) {
 
 	return Count;
 }
+
+void SLL_InsertBefore(Node** Head, Node* Current, Node* NewNode) {
+	if (*Head == NULL) {
+		return;
+
+	}
+	if(*Head == Current) {
+		NewNode->NextNode = Current;
+		*Head = NewNode;
+	}
+	else {
+		Node* Node = *Head;
+		while (Node != NULL && Node->NextNode != Current) {
+			Node = Node->NextNode;
+		}
+
+		if (Node != NULL) {
+			Node->NextNode = NewNode;
+			NewNode->NextNode = Current;
+		}
+	}
+}
+
+void SLL_DestroyAllNodes(Node** List) {
+	Node* Current = *List;
+	Node* Next = NULL;
+
+	while (Current != NULL) {
+		Next = Current->NextNode;
+		SLL_DestroyNode(Current);
+		Current = Next;
+	}
+
+	*List = NULL;
+}

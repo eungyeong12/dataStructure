@@ -41,17 +41,33 @@ int main(void) {
 		printf("List[%d] : %d\n", i, Current->Data);
 	}
 
+	// 리스트의 두 번째 노드 앞에 새 노드 삽입
+	printf("\nInserting 3000 Before [1]...\n\n");
+
+	Current = SLL_GetNodeAt(List, 1);
+	NewNode = SLL_CreateNode(3000);
+
+	SLL_InsertBefore(&List, Current, NewNode);
+
+	// 리스트 출력
+	Count = SLL_GetNodeCount(List);
+	for (i = 0; i < Count; i++) {
+		Current = SLL_GetNodeAt(List, i);
+		printf("List[%d] : %d\n", i, Current->Data);
+	}
+
 	// 모든 노드를 메모리에서 제거
 	printf("\nDestroying List...\n");
 
-	for (i = 0; i < Count; i++) {
+	/*for (i = 0; i < Count; i++) {
 		Current = SLL_GetNodeAt(List, 0);
 
 		if (Current != NULL) {
 			SLL_RemoveNode(&List, Current);
 			SLL_DestroyNode(Current);
 		}
-	}
+	}*/
 
+	SLL_DestroyAllNodes(&List);
 	return 0;
 }
